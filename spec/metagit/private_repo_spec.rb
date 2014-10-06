@@ -30,7 +30,7 @@ module Metagit
         expect(@repo.changes_since? @repo_raw.commits.first).to eq true
       end
 
-      it "should be true when there are no changes" do
+      it "should be false when there are no changes" do
         expect(@repo.changes_since? @repo_raw.commits.last).to eq false
       end
 
@@ -71,7 +71,13 @@ module Metagit
     end
 
 
+    describe "#stats_overall" do
 
+      it "should tell me how many commits are mine" do
+        skip
+        expect(@repo.stats_overall)
+      end
+    end
 
   end
 end

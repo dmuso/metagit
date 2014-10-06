@@ -8,7 +8,7 @@ module Metagit
 
     before :each do
       # we may mock this if speed/complexity get in the way
-      Metagit::RuggedRepo.new(repo_path, my_email)
+      Metagit::Support::RuggedRepo.new(repo_path, my_email)
       @repo = PrivateRepo.new repo_path
     end
 

@@ -1,4 +1,4 @@
-require 'git'
+require 'rugged'
 
 module Metagit
   class PrivateRepo
@@ -6,11 +6,11 @@ module Metagit
     def initialize(working_dir)
       @working_dir = working_dir
 
-      @g = Git.open(@working_dir)
+      @g = Rugged::Repository.new(@working_dir)
     end
 
     def readable?
-      @g.index.readable?
+      !@g.index.nil?
     end
 
     def log

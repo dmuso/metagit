@@ -10,7 +10,6 @@ GEM
     awesome_print (1.2.0)
     coderay (1.1.0)
     diff-lcs (1.2.5)
-    git (1.2.8)
     i18n (0.6.11)
     json (1.8.1)
     method_source (0.8.2)
@@ -33,6 +32,7 @@ GEM
     rspec-mocks (3.1.2)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.1)
+    rugged (0.21.0)
     slop (3.6.0)
     thread_safe (0.3.4)
     tzinfo (1.2.2)
@@ -43,7 +43,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  git
   namazing
   pry
   rspec
+  rugged

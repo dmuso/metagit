@@ -10,5 +10,5 @@ group :development, :test do
 end
 
 
-gem 'git'
+gem 'rugged'
 gem 'namazing'

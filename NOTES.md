@@ -39,7 +39,7 @@ README.md ::
 Super Cool Rocket
 =================
 
-## Sai's Contribution Summary
+## Dan's Contribution Summary
 
 Total number of commits:  13
 Last Contributed:         12/12/2013

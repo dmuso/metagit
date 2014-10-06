@@ -15,7 +15,6 @@ module Metagit
       def commit_to_repo email
         oid = @repo.write("This is a blob.", :blob)
         index = @repo.index
-        # index.read_tree(repo.head.target.tree)
         index.add(:path => "README.md", :oid => oid, :mode => 0100644)
 
         options = {}

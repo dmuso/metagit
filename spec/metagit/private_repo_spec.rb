@@ -23,6 +23,7 @@ module Metagit
       expect(@repo.readable?).to eq true
     end
 
+
     describe "#changes_since?" do
 
       it "should be true when there are changes" do
@@ -31,6 +32,32 @@ module Metagit
 
       it "should be true when there are no changes" do
         expect(@repo.changes_since? @repo_raw.commits.last).to eq false
+      end
+
+    end
+
+
+    describe "#stats_for_commit" do
+
+      it "should have the email of the author" do
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:author_email]).to eq "dan@dot.com"
+      end
+
+      it "should have the commit timestamp" do
+        # don't run this near midnight :) TODO: more accuracy
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:time].day).to eq Time.now.day
+      end
+
+      it "should have the number of files changed" do
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:no_files_changed]).to eq 1
+      end
+
+      it "should have the number of insertions" do
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:no_insertions]).to eq 0
+      end
+
+      it "should have the number of deletions" do
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:no_deletions]).to eq 1
       end
 
     end

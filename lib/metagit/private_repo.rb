@@ -1,7 +1,7 @@
 require 'git'
 
 module Metagit
-  class Private_repo
+  class PrivateRepo
 
     def initialize(working_dir)
       @working_dir = working_dir

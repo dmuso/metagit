@@ -8,7 +8,7 @@ module Metagit
 
     before :each do
       # we may mock this if speed/complexity get in the way
-      Metagit::Support::RuggedRepo.new(repo_path, my_email)
+      @repo_raw = Metagit::Support::RuggedRepo.new(repo_path, my_email)
       @repo = PrivateRepo.new repo_path
     end
 
@@ -25,10 +25,12 @@ module Metagit
 
     describe "#changes_since?" do
 
-      subject { PrivateRepo.changes_since? "d84ee003b0495c7426c4e13814579e2bb2a3830d" }
+      it "should be true when there are changes" do
+        expect(@repo.changes_since? @repo_raw.commits.first).to eq true
+      end
 
-      it "should" do
-        skip
+      it "should be true when there are no changes" do
+        expect(@repo.changes_since? @repo_raw.commits.last).to eq false
       end
 
     end

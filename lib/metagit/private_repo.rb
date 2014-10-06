@@ -3,18 +3,17 @@ require 'rugged'
 module Metagit
   class PrivateRepo
 
-    def initialize(working_dir)
-      @working_dir = working_dir
-
-      @g = Rugged::Repository.new(@working_dir)
+    def initialize(repo_path)
+      @repo_path = repo_path
+      @repo = Rugged::Repository.new(@repo_path)
     end
 
     def readable?
-      !@g.index.nil?
+      !@repo.index.nil?
     end
 
-    def log
-      @g.log
+    def changes_since? sha
+      @repo.lookup(sha) != @repo.head.target
     end
 
   end

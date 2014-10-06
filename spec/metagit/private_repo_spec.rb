@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'fileutils'
 
 module Metagit
   describe PrivateRepo do
@@ -14,7 +15,6 @@ module Metagit
 
     after :each do
       # clean up after ourselves
-      require 'fileutils'
       FileUtils.rm_rf repo_path
     end
 
@@ -60,7 +60,17 @@ module Metagit
         expect(@repo.stats_for_commit(@repo_raw.commits.first)[:no_deletions]).to eq 1
       end
 
+      it "should also work for other commits" do
+        expect(@repo.stats_for_commit(@repo_raw.commits[1])[:author_email]).not_to eq "dan@dot.com"
+      end
+
+      it "should also work for other commits files changed" do
+        expect(@repo.stats_for_commit(@repo_raw.commits[1])[:no_files_changed]).to eq 1
+      end
+
     end
+
+
 
 
   end

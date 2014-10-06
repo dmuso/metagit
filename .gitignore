@@ -1,2 +1,3 @@
 config/metagit.yml
 .idea
+tmp/*

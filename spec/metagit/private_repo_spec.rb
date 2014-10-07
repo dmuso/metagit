@@ -11,6 +11,7 @@ module Metagit
       # we may mock this if speed/complexity get in the way
       @repo_raw = Metagit::Support::RuggedRepo.new(repo_path, my_email)
       @repo = PrivateRepo.new repo_path
+      allow(Metagit).to receive(:config).and_return({ "emails" => [ my_email ] })
     end
 
     after :each do
@@ -74,8 +75,7 @@ module Metagit
     describe "#stats_overall" do
 
       it "should tell me how many commits are mine" do
-        skip
-        expect(@repo.stats_overall)
+        expect(@repo.stats_overall[:no_my_commits]).to eq 2
       end
     end
 

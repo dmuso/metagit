@@ -1,5 +1,7 @@
 require 'yaml'
 
 module Metagit
-  CONFIG = YAML.load_file('config/metagit.yml')
+  def self.config
+    @@config ||= YAML.load_file('config/metagit.yml')
+  end
 end

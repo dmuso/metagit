@@ -29,13 +29,23 @@ module Metagit
     end
 
     def stats_overall
-      stats_overall = { no_my_commits: 0 }
+      stats_overall = {
+        no_my_commits: 0,
+        no_total_commits: 0,
+        last_contributed: Time.at(0),
+        contributors: []
+      }
       walker = Rugged::Walker.new(@repo)
       walker.sorting(Rugged::SORT_DATE)
       walker.push(@repo.head.target)
       walker.each do |c|
+        stats_overall[:no_total_commits] += 1
+        if !stats_overall[:contributors].include?(c.to_hash[:author][:email])
+          stats_overall[:contributors] << c.to_hash[:author][:email]
+        end
         if Metagit.config["emails"].include?(c.to_hash[:author][:email])
           stats_overall[:no_my_commits] += 1
+          stats_overall[:last_contributed] = c.to_hash[:author][:time]
         end
       end
       walker.reset

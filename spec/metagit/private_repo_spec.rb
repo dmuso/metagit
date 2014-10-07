@@ -6,6 +6,7 @@ module Metagit
 
     let(:repo_path) { "./tmp/test_repo_private" }
     let(:my_email) { "dan@dot.com" }
+    let(:not_my_email) { "notme@somewhere-else.com" }
 
     before :each do
       # we may mock this if speed/complexity get in the way
@@ -74,9 +75,22 @@ module Metagit
 
     describe "#stats_overall" do
 
+      it "should tell me how total commits there are" do
+        expect(@repo.stats_overall[:no_total_commits]).to eq 3
+      end
+
       it "should tell me how many commits are mine" do
         expect(@repo.stats_overall[:no_my_commits]).to eq 2
       end
+
+      it "should tell when my last commit was" do
+        expect(@repo.stats_overall[:last_contributed].day).to eq Time.now.day
+      end
+
+      it "should tell me all the contributors" do
+        expect(@repo.stats_overall[:contributors]).to eq [ my_email, not_my_email ]
+      end
+
     end
 
   end

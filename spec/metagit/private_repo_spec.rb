@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'fileutils'
+require 'timecop'
 
 module Metagit
   describe PrivateRepo do
@@ -9,6 +10,7 @@ module Metagit
     let(:not_my_email) { "notme@somewhere-else.com" }
 
     before :each do
+      Timecop.freeze(Time.local(2014, 9, 1, 10, 0, 0))
       # we may mock this if speed/complexity get in the way
       @repo_raw = Metagit::Support::RuggedRepo.new(repo_path, my_email)
       @repo = PrivateRepo.new repo_path
@@ -18,6 +20,7 @@ module Metagit
     after :each do
       # clean up after ourselves
       FileUtils.rm_rf repo_path
+      Timecop.return
     end
 
 
@@ -47,7 +50,7 @@ module Metagit
 
       it "should have the commit timestamp" do
         # don't run this near midnight :) TODO: more accuracy
-        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:time].day).to eq Time.now.day
+        expect(@repo.stats_for_commit(@repo_raw.commits.first)[:time]).to eq Time.now
       end
 
       it "should have the number of files changed" do
@@ -84,11 +87,19 @@ module Metagit
       end
 
       it "should tell when my last commit was" do
-        expect(@repo.stats_overall[:last_contributed].day).to eq Time.now.day
+        expect(@repo.stats_overall[:last_contributed]).to eq Time.now
       end
 
       it "should tell me all the contributors" do
         expect(@repo.stats_overall[:contributors]).to eq [ my_email, not_my_email ]
+      end
+
+      it "should contain a list of my commits" do
+        expect(@repo.stats_overall[:my_commits].size).to eq 2
+      end
+
+      it "should some detail on my commits" do
+        expect(@repo.stats_overall[:my_commits].first[:no_files_changed]).to eq 1
       end
 
     end

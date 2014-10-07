@@ -7,7 +7,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    awesome_print (1.2.0)
     coderay (1.1.0)
     diff-lcs (1.2.5)
     i18n (0.6.11)
@@ -35,6 +34,7 @@ GEM
     rugged (0.21.0)
     slop (3.6.0)
     thread_safe (0.3.4)
+    timecop (0.7.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
@@ -42,8 +42,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
   namazing
   pry
   rspec
   rugged
+  timecop

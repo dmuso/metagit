@@ -33,7 +33,8 @@ module Metagit
         no_my_commits: 0,
         no_total_commits: 0,
         last_contributed: Time.at(0),
-        contributors: []
+        contributors: [],
+        my_commits: []
       }
       walker = Rugged::Walker.new(@repo)
       walker.sorting(Rugged::SORT_DATE)
@@ -46,6 +47,7 @@ module Metagit
         if Metagit.config["emails"].include?(c.to_hash[:author][:email])
           stats_overall[:no_my_commits] += 1
           stats_overall[:last_contributed] = c.to_hash[:author][:time]
+          stats_overall[:my_commits] << stats_for_commit(c.oid)
         end
       end
       walker.reset

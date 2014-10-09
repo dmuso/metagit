@@ -30,17 +30,8 @@ module Metagit
 
     describe "#name" do
 
-      it "should match the repo path" do
-        expect(@repo.name).to eq "test_repo_private"
-      end
-
-    end
-
-
-    describe "#awesome_name" do
-
       it "should not be the same as name" do
-        expect(@repo.awesome_name).not_to eq "test_repo_private"
+        expect(@repo.name).not_to eq "test_repo_private"
       end
 
     end
@@ -133,8 +124,8 @@ module Metagit
 
     describe "#to_markdown" do
 
-      it "should have the awesome name as the heading" do
-        expect(@repo.to_markdown).to match(/^# #{@repo.awesome_name}$/)
+      it "should have the name as the heading" do
+        expect(@repo.to_markdown).to match(/^# #{@repo.name}$/)
       end
 
       context "my contributions summary" do

@@ -10,11 +10,7 @@ module Metagit
     end
 
     def name
-      @repo.workdir.split("/").last
-    end
-
-    def awesome_name
-      Namazing.to_awesome self.name
+      Namazing.to_awesome @repo.workdir.split("/").last
     end
 
     def readable?
@@ -65,7 +61,7 @@ module Metagit
 
     def to_markdown
       md = <<-eof
-# #{self.awesome_name}
+# #{self.name}
 
 ## #{Metagit.config["first_name"]}'s Contribution Summary
 

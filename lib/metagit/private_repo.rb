@@ -63,5 +63,28 @@ module Metagit
       stats_overall
     end
 
+    def to_markdown
+      md = <<-eof
+# #{self.awesome_name}
+
+## #{Metagit.config[:first_name]}'s Contribution Summary
+
+Total commits:      #{self.stats_overall[:no_my_commits]}
+Last contributed:   #{self.stats_overall[:last_contributed]}
+
+## Repository Summary
+
+Total commits:      #{self.stats_overall[:no_total_commits]}
+Contributors:       #{self.stats_overall[:contributors].length}
+
+## #{Metagit.config[:first_name]}'s Commits
+
+eof
+      self.stats_overall[:my_commits].each do |commit|
+        md += "#{commit[:time]}   #{commit[:no_files_changed]} files changed, #{commit[:no_insertions]} insertions, #{commit[:no_deletions]} deletions"
+      end
+      md
+    end
+
   end
 end

@@ -2,6 +2,8 @@
 # Create a copy of this file and make sure it's available
 # at:  config/metagit.yml
 
+first_name: Dan
+last_name:  Harper
 
 # These email addresses when found in a Git commit history
 # will be considered one of your commits

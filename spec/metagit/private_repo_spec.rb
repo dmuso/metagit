@@ -14,7 +14,11 @@ module Metagit
       # we may mock this if speed/complexity get in the way
       @repo_raw = Metagit::Support::RuggedRepo.new(repo_path, my_email)
       @repo = PrivateRepo.new repo_path
-      allow(Metagit).to receive(:config).and_return({ "emails" => [ my_email ] })
+      allow(Metagit).to receive(:config).and_return({
+        "first_name"  => "Dan",
+        "last_name"   => "Harper",
+        "emails"      => [ my_email ]
+      })
     end
 
     after :each do
@@ -124,6 +128,70 @@ module Metagit
         expect(@repo.stats_overall[:my_commits].first[:no_files_changed]).to eq 1
       end
 
+    end
+
+
+    describe "#to_markdown" do
+
+      it "should have the awesome name as the heading" do
+        expect(@repo.to_markdown).to match(/^# #{@repo.awesome_name}$/)
+      end
+
+      context "my contributions summary" do
+
+        it "should have my contributions as a sub-heading" do
+          expect(@repo.to_markdown).to match(/^## #{Metagit.config[:first_name]}'s Contribution Summary$/)
+        end
+
+        it "should have the total number of commits" do
+          expect(@repo.to_markdown).to match(/^Total commits:( *)2$/)
+        end
+
+        it "should have my last contribution date" do
+          expect(@repo.to_markdown).to match(/^Last contributed:( *)#{Time.now.year}/)
+        end
+
+      end
+
+      context "repository summary" do
+
+        it "should have the repository summary as a sub-heading" do
+          expect(@repo.to_markdown).to match(/^## Repository Summary$/)
+        end
+
+        it "should have the total number of commits" do
+          expect(@repo.to_markdown).to match(/^Total commits:( *)3$/)
+        end
+
+        it "should have the total number of contributors" do
+          expect(@repo.to_markdown).to match(/^Contributors:( *)2$/)
+        end
+
+      end
+
+      context "my commit history" do
+
+        it "should have my commit history as a sub-heading" do
+          expect(@repo.to_markdown).to match(/^## #{Metagit.config[:first_name]}'s Commits$/)
+        end
+
+        it "should have the timestamp of a commit" do
+          expect(@repo.to_markdown).to match(/^#{@repo.stats_overall[:my_commits].first[:time].year}/)
+        end
+
+        it "should have the number of files changed" do
+          expect(@repo.to_markdown).to match(/#{@repo.stats_overall[:my_commits].first[:no_files_changed]} files changed/)
+        end
+
+        it "should have the number of insertions" do
+          expect(@repo.to_markdown).to match(/#{@repo.stats_overall[:my_commits].first[:no_insertions]} insertions/)
+        end
+
+        it "should have the number of deletions" do
+          expect(@repo.to_markdown).to match(/#{@repo.stats_overall[:my_commits].first[:no_deletions]} deletions/)
+        end
+
+      end
     end
 
   end

@@ -1,4 +1,5 @@
 require 'rugged'
+require 'namazing'
 
 module Metagit
   class PrivateRepo
@@ -6,6 +7,14 @@ module Metagit
     def initialize(repo_path)
       @repo_path = repo_path
       @repo = Rugged::Repository.new(@repo_path)
+    end
+
+    def name
+      @repo.workdir.split("/").last
+    end
+
+    def awesome_name
+      Namazing.to_awesome self.name
     end
 
     def readable?

@@ -24,8 +24,30 @@ module Metagit
     end
 
 
-    it 'the repo is readable' do
-      expect(@repo.readable?).to eq true
+    describe "#name" do
+
+      it "should match the repo path" do
+        expect(@repo.name).to eq "test_repo_private"
+      end
+
+    end
+
+
+    describe "#awesome_name" do
+
+      it "should not be the same as name" do
+        expect(@repo.awesome_name).not_to eq "test_repo_private"
+      end
+
+    end
+
+
+    describe "#readable?" do
+
+      it 'the repo is readable' do
+        expect(@repo.readable?).to eq true
+      end
+
     end
 
 

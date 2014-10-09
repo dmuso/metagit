@@ -140,7 +140,7 @@ module Metagit
       context "my contributions summary" do
 
         it "should have my contributions as a sub-heading" do
-          expect(@repo.to_markdown).to match(/^## #{Metagit.config[:first_name]}'s Contribution Summary$/)
+          expect(@repo.to_markdown).to match(/^## #{Metagit.config["first_name"]}'s Contribution Summary$/)
         end
 
         it "should have the total number of commits" do
@@ -172,7 +172,7 @@ module Metagit
       context "my commit history" do
 
         it "should have my commit history as a sub-heading" do
-          expect(@repo.to_markdown).to match(/^## #{Metagit.config[:first_name]}'s Commits$/)
+          expect(@repo.to_markdown).to match(/^## #{Metagit.config["first_name"]}'s Commits$/)
         end
 
         it "should have the timestamp of a commit" do

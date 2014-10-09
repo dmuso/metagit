@@ -67,7 +67,7 @@ module Metagit
       md = <<-eof
 # #{self.awesome_name}
 
-## #{Metagit.config[:first_name]}'s Contribution Summary
+## #{Metagit.config["first_name"]}'s Contribution Summary
 
 Total commits:      #{self.stats_overall[:no_my_commits]}
 Last contributed:   #{self.stats_overall[:last_contributed]}
@@ -77,7 +77,7 @@ Last contributed:   #{self.stats_overall[:last_contributed]}
 Total commits:      #{self.stats_overall[:no_total_commits]}
 Contributors:       #{self.stats_overall[:contributors].length}
 
-## #{Metagit.config[:first_name]}'s Commits
+## #{Metagit.config["first_name"]}'s Commits
 
 eof
       self.stats_overall[:my_commits].each do |commit|

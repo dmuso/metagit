@@ -125,7 +125,7 @@ module Metagit
     describe "#to_markdown" do
 
       it "should have the name as the heading" do
-        expect(@repo.to_markdown).to match(/^# #{@repo.name}$/)
+        expect(@repo.to_markdown).to match(/^# #{@repo.name.titleize}$/)
       end
 
       context "my contributions summary" do

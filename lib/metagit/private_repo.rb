@@ -1,5 +1,6 @@
 require 'rugged'
 require 'namazing'
+require 'active_support/inflections'
 
 module Metagit
   class PrivateRepo
@@ -61,7 +62,7 @@ module Metagit
 
     def to_markdown
       md = <<-eof
-# #{self.name}
+# #{self.name.titleize}
 
 ## #{Metagit.config["first_name"]}'s Contribution Summary
 

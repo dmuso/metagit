@@ -11,3 +11,4 @@ end
 
 gem 'rugged'
 gem 'namazing'
+gem 'activesupport'

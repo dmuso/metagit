@@ -182,6 +182,10 @@ module Metagit
           expect(@repo.to_markdown).to match(/#{@repo.stats_overall[:my_commits].first[:no_deletions]} deletions/)
         end
 
+        it "should end with a line ending" do
+          expect(@repo.to_markdown).to match(/deletions\n$/)
+        end
+
       end
     end
 

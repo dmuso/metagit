@@ -76,9 +76,11 @@ Contributors:       #{self.stats_overall[:contributors].length}
 
 ## #{Metagit.config["first_name"]}'s Commits
 
+Date/Time|Commit details
+-|-
 eof
       self.stats_overall[:my_commits].each do |commit|
-        md += "#{commit[:time]}   #{commit[:no_files_changed]} files changed, #{commit[:no_insertions]} insertions, #{commit[:no_deletions]} deletions"
+        md += "#{commit[:time]}|#{commit[:no_files_changed]} files changed, #{commit[:no_insertions]} insertions, #{commit[:no_deletions]} deletions\n"
       end
       md
     end

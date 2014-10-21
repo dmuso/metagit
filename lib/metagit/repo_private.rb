@@ -1,26 +1,7 @@
-require 'rugged'
-require 'namazing'
-require 'active_support/inflections'
+require_relative "repo"
 
 module Metagit
-  class PrivateRepo
-
-    def initialize(repo_path)
-      @repo_path = repo_path
-      @repo = Rugged::Repository.new(@repo_path)
-    end
-
-    def name
-      Namazing.to_awesome @repo.workdir.split("/").last
-    end
-
-    def readable?
-      !@repo.index.nil?
-    end
-
-    def changes_since? sha
-      @repo.lookup(sha) != @repo.head.target
-    end
+  class RepoPrivate < Repo
 
     def stats_for_commit sha
       stats = {}

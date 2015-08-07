@@ -29,7 +29,6 @@ module Metagit
 
 
     describe "#stats_for_commit" do
-
       it "should have the email of the author" do
         expect(@repo.stats_for_commit(@repo_raw.commits.first)[:author_email]).to eq "dan@dot.com"
       end
@@ -58,12 +57,9 @@ module Metagit
       it "should also work for other commits files changed" do
         expect(@repo.stats_for_commit(@repo_raw.commits[1])[:no_files_changed]).to eq 1
       end
-
     end
 
-
     describe "#stats_overall" do
-
       it "should tell me how total commits there are" do
         expect(@repo.stats_overall[:no_total_commits]).to eq 3
       end
@@ -87,18 +83,14 @@ module Metagit
       it "should some detail on my commits" do
         expect(@repo.stats_overall[:my_commits].first[:no_files_changed]).to eq 1
       end
-
     end
 
-
     describe "#to_markdown" do
-
       it "should have the name as the heading" do
         expect(@repo.to_markdown).to match(/^# #{@repo.name.titleize}$/)
       end
 
       context "my contributions summary" do
-
         it "should have my contributions as a sub-heading" do
           expect(@repo.to_markdown).to match(/^## #{Metagit.config["first_name"]}'s Contribution Summary$/)
         end
@@ -110,11 +102,9 @@ module Metagit
         it "should have my last contribution date" do
           expect(@repo.to_markdown).to match(/^Last contributed:( *)#{Time.now.year}/)
         end
-
       end
 
       context "repository summary" do
-
         it "should have the repository summary as a sub-heading" do
           expect(@repo.to_markdown).to match(/^## Repository Summary$/)
         end
@@ -126,11 +116,9 @@ module Metagit
         it "should have the total number of contributors" do
           expect(@repo.to_markdown).to match(/^Contributors:( *)2$/)
         end
-
       end
 
       context "my commit history" do
-
         it "should have my commit history as a sub-heading" do
           expect(@repo.to_markdown).to match(/^## #{Metagit.config["first_name"]}'s Commits$/)
         end
@@ -154,9 +142,7 @@ module Metagit
         it "should end with a line ending" do
           expect(@repo.to_markdown).to match(/deletions\n$/)
         end
-
       end
     end
-
   end
 end

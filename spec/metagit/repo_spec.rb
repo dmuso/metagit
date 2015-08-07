@@ -34,18 +34,13 @@ module Metagit
 
     end
 
-
     describe "#readable?" do
-
       it 'the repo is readable' do
         expect(@repo.readable?).to eq true
       end
-
     end
 
-
     describe "#changes_since?" do
-
       it "should be true when there are changes" do
         expect(@repo.changes_since? @repo_raw.commits.first).to eq true
       end
@@ -53,8 +48,6 @@ module Metagit
       it "should be false when there are no changes" do
         expect(@repo.changes_since? @repo_raw.commits.last).to eq false
       end
-
     end
-
   end
 end

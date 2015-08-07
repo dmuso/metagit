@@ -29,7 +29,6 @@ module Metagit
         @commits << Rugged::Commit.create(@repo, options)
         index.write
       end
-
     end
   end
 end
